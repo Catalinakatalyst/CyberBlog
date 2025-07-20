@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<Layout title="Blog - Cybersecurity Analyst">
+  <main>
+    <h1>Blog Posts</h1>
+    <p>All posts from the cybersecurity frontlines.</p>
+    
+    <ul class="post-list">
+      {sortedPosts.map(post => (
+        <li class="post-item">
+          <a href={`/web-blog/blog/${post.slug}`} class="post-link">
+            <h2>{post.data.title}</h2>
+            <p class="post-description">{post.data.description}</p>
+            <div class="post-meta">
+              <span class="post-date">{post.data.pubDate.toLocaleDateString()}</span>
+              {post.data.author && <span class="post-author">by {post.data.author}</span>}
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+  
+  .post-item {
+    margin: 2rem 0;
+  }
+  
+  .post-link {
+    display: block;
+    padding: 2rem;
+    background: #1a1d29;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .post-link:hover {
+    border-color: #00d2ff;
+    background: #1e2233;
+    transform: translateY(-2px);
+  }
+  
+  .post-link h2 {
+    margin: 0 0 1rem 0;
+    color: #00d2ff;
+    font-size: 1.5rem;
+  }
+  
+  .post-description {
+    margin: 1rem 0;
+    color: #ccc;
+    font-size: 1.1rem;
+  }
+  
+  .post-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 1rem;
+  }
+  
+  .post-author {
+    margin-left: 10px;
+  }
+</style>
