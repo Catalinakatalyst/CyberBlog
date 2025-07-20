@@ -1,0 +1,67 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Personal Cybersecurity Blog" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <style>
+      html {
+        font-family: system-ui, sans-serif;
+        background: #13151a;
+        color: #fff;
+      }
+      body {
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      h1 {
+        color: #00d2ff;
+        border-bottom: 2px solid #00d2ff;
+        padding-bottom: 10px;
+      }
+      a {
+        color: #00d2ff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      nav {
+        margin: 20px 0;
+        padding: 20px 0;
+        border-bottom: 1px solid #333;
+      }
+      nav a {
+        margin-right: 20px;
+      }
+      .cyber-theme {
+        background: linear-gradient(135deg, #13151a 0%, #1a1d29 100%);
+      }
+    </style>
+  </head>
+  <body class="cyber-theme">
+    <div class="container">
+      <nav>
+        <a href="/web-blog/">Home</a>
+        <a href="/web-blog/blog/">Blog</a>
+      </nav>
+      <slot />
+    </div>
+  </body>
+</html>

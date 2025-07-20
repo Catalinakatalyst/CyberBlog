@@ -1,0 +1,8 @@
+# Threat Map Image Placeholder
+
+This is a placeholder for the threat map image referenced in the threat-hunting.md blog post.
+
+In a real deployment, you would place an actual threat map image file here:
+/images/threat-map.png
+
+For now, this text file serves as a placeholder to maintain the directory structure.

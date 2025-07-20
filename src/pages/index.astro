@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<Layout title="Cybersecurity Analyst Blog">
+  <main>
+    <section class="hero">
+      <h1>🛡️ Cybersecurity Analyst Blog</h1>
+      <p class="hero-description">
+        Welcome! I'm a cybersecurity analyst sharing notes, research, and strategies from the frontlines of digital defense.
+      </p>
+    </section>
+
+    <section class="about">
+      <h2>About This Blog</h2>
+      <p>
+        This is where I document my journey in cybersecurity, share threat intelligence insights, 
+        analyze malware samples, and discuss the latest trends in the ever-evolving threat landscape.
+      </p>
+    </section>
+
+    <section class="recent-posts">
+      <h2>Latest Posts</h2>
+      <ul class="post-list">
+        {sortedPosts.map(post => (
+          <li class="post-item">
+            <a href={`/web-blog/blog/${post.slug}`} class="post-link">
+              <h3>{post.data.title}</h3>
+              <p class="post-description">{post.data.description}</p>
+              <div class="post-meta">
+                <span class="post-date">{post.data.pubDate.toLocaleDateString()}</span>
+                {post.data.author && <span class="post-author">by {post.data.author}</span>}
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="focus-areas">
+      <h2>Focus Areas</h2>
+      <div class="focus-grid">
+        <div class="focus-item">
+          <h3>🎯 Threat Hunting</h3>
+          <p>Proactive threat detection and analysis</p>
+        </div>
+        <div class="focus-item">
+          <h3>🔍 Malware Analysis</h3>
+          <p>Deep dives into malicious software</p>
+        </div>
+        <div class="focus-item">
+          <h3>📊 Threat Intelligence</h3>
+          <p>Analysis of emerging threats and TTPs</p>
+        </div>
+        <div class="focus-item">
+          <h3>🚨 Incident Response</h3>
+          <p>Lessons from security incidents</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    padding: 0 20px;
+  }
+  
+  .hero {
+    text-align: center;
+    margin: 2rem 0 4rem 0;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-description {
+    font-size: 1.2rem;
+    color: #ccc;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .about {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: #1a1d29;
+    border-radius: 8px;
+    border-left: 4px solid #00d2ff;
+  }
+  
+  .recent-posts {
+    margin: 3rem 0;
+  }
+  
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .post-item {
+    margin: 1.5rem 0;
+  }
+  
+  .post-link {
+    display: block;
+    padding: 1.5rem;
+    background: #1a1d29;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .post-link:hover {
+    border-color: #00d2ff;
+    background: #1e2233;
+    transform: translateY(-2px);
+  }
+  
+  .post-link h3 {
+    margin: 0 0 0.5rem 0;
+    color: #00d2ff;
+    font-size: 1.3rem;
+  }
+  
+  .post-description {
+    margin: 0.5rem 0;
+    color: #ccc;
+  }
+  
+  .post-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 1rem;
+  }
+  
+  .post-author {
+    margin-left: 10px;
+  }
+  
+  .focus-areas {
+    margin: 4rem 0;
+  }
+  
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .focus-item {
+    padding: 1.5rem;
+    background: #1a1d29;
+    border-radius: 8px;
+    border: 1px solid #333;
+    text-align: center;
+  }
+  
+  .focus-item h3 {
+    color: #00d2ff;
+    margin-bottom: 0.5rem;
+  }
+  
+  .focus-item p {
+    color: #ccc;
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .focus-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
