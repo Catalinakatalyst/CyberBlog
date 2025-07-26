@@ -21,7 +21,7 @@ Start with a hypothesis about potential threats based on:
 - Industry-specific threats
 
 ### 2. Data Collection
-Gather relevant data from multiple sources:
+Gather relevant data from multiple sources:OSINT
 - Network logs
 - Endpoint telemetry
 - DNS queries
